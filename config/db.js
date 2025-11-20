@@ -39,3 +39,29 @@ export async function traerColleccion() {
         }
     }
 }
+
+export async function traerEdad(edad){
+    try{
+         const edadSchema = new db.Schema();
+        const edadModel = db.models.Usuarios || db.model("Usuarios", edadSchema, "Usuarios")
+        const rolFind = await edadModel.find({edad: edad})
+
+        return{
+            status: 200,
+            response: {
+                success: true,
+                message: rolFind
+            }
+        }   
+
+    }catch(e){
+        return{
+            status: 401,
+            response: {
+                success: false,
+                message: e.message
+            }
+        }
+    
+    }
+}
